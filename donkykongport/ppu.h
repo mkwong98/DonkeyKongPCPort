@@ -2,18 +2,34 @@
 #include <SDL3/SDL.h>
 #include "vector"
 
+const Uint8 MAX_SPRITE_PER_LINE = 8; // maximum number of sprites per scanline
+
 class console;
 
-struct pixelDetails {
-	Uint8 source; // 0 = empty, 1 = back sprite, 2 = bg, 3 = front sprite
+struct bgPixelDetails {
 	Uint16 patternID;
 	Uint8 paletteID;
 	Uint8 colourID;
 	Uint8 x;
 	Uint8 y;
+};
+
+struct spPixelDetails {
+	Uint16 patternID;
+	Uint8 paletteID;
+	Uint8 colourID;
+	Uint8 x;
+	Uint8 visibleLine;
 	Uint8 spriteID;
 	bool hFlip;
 	bool vFlip;
+	bool front;
+};
+
+struct spPixelLocation{
+	Uint8 x;
+	Uint8 y;
+	Uint8 cnt;
 };
 
 class ppu
@@ -22,14 +38,20 @@ public:
 	console* myConsole;
 	Uint8 nametable[1024];
 	Uint8 paletteRAM[32];
-	pixelDetails screenPixels[256 * 240][10]; // 256x240 pixels * 10 possible pixels per location
-	Uint8 screenPixelsCnt[256 * 240];
+	Uint8 bg0ColourIDs[256 * 240];
+	bgPixelDetails bgScreenPixels[256 * 240];
+	spPixelDetails spScreenPixels[64 * 128][MAX_SPRITE_PER_LINE]; // 64 sprites * 128 pixel per sprite * 8 sprites per pixel
+	spPixelLocation spPixelLocation[64 * 128];
+	Uint16 spScreenPixelsCnt;
 
 	ppu();
 	void render();
 	
 	Uint8 readReg(Uint16 address);
 	void writeReg(Uint16 address, Uint8 v);
+	//reg 4014 OAMDMA
+	void writeReg4014(Uint8 v);
+
 private:
 	Uint8 ioBus;
 	bool wReg;
@@ -83,8 +105,6 @@ private:
 	void readReg2007();
 	void writeReg2007();
 
-	//reg 4014 OAMDMA
-	void writeReg4014(Uint8 v);
 
 
 };

@@ -32,6 +32,9 @@ void mapper000::writeCPU(Uint16 address, Uint8 value) {
 	else if (address < 0x4000) {
 		rom->myConsole->ppu.writeReg(address & 0x2007, value);
 	}
+	else if (address == 0x4014) {
+		rom->myConsole->ppu.writeReg4014(value);
+	}
 }
 
 Uint8 mapper000::readPPU(Uint16 address) {
