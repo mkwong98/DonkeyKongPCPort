@@ -40,6 +40,9 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
     if (event->type == SDL_EVENT_QUIT) {
         return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
     }
+	if (event->type == SDL_EVENT_KEY_DOWN || event->type == SDL_EVENT_KEY_UP) {
+		myConsole.controllers.handleEvent(event);
+	}
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
 

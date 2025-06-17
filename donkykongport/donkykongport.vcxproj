@@ -154,9 +154,11 @@
     <ClCompile Include="apu.cpp" />
     <ClCompile Include="binaryUtil.cpp" />
     <ClCompile Include="console.cpp" />
+    <ClCompile Include="controller.cpp" />
     <ClCompile Include="donkykongport.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameCode.cpp" />
+    <ClCompile Include="ioPort.cpp" />
     <ClCompile Include="mapper.cpp" />
     <ClCompile Include="mapper000.cpp" />
     <ClCompile Include="ppu.cpp" />
@@ -167,7 +169,9 @@
     <ClInclude Include="apu.h" />
     <ClInclude Include="binaryUtil.h" />
     <ClInclude Include="console.h" />
+    <ClInclude Include="controller.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="ioPort.h" />
     <ClInclude Include="mapper.h" />
     <ClInclude Include="mapper000.h" />
     <ClInclude Include="ppu.h" />

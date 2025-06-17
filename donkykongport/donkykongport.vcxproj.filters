@@ -48,6 +48,12 @@
     <ClCompile Include="render.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="ioPort.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="controller.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ppu.h">
@@ -75,6 +81,12 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="render.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="ioPort.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="controller.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

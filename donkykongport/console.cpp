@@ -5,7 +5,10 @@ console::console() {
 	ppu.myConsole = this;
 	apu.myConsole = this;
 	rom.myConsole = this;
+	iop.myConsole = this;
+
 	renderer.myConsole = this;
+	controllers.myConsole = this;
 }
 
 void console::runFrame(Uint64 ns) {
