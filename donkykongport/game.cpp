@@ -202,7 +202,14 @@ void game::popStatus() {
 	mStack.pop();
 }
 
-void game::setLoadFlag(Uint8 v) {\
+void game::setLoadFlag(Uint8 v) {
 	flgZ = v == 0;
 	flgN = v & 0x80;
+}
+
+void game::opCMP(Uint8 v1, Uint8 v2) {
+	flgC = v1 >= v2;
+	flgZ = v1 == v2;
+	Uint16 result = (v1 < v2 ? v1 + 0x100 - v2 : v1 - v2);
+	flgN = result & 0x80;
 }

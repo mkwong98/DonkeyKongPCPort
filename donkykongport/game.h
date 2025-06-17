@@ -54,6 +54,7 @@ public:
 	void opROL_M(Uint16 address, Uint8 repeatTimes);
 	void opROR_A(Uint8 repeatTimes);
 	void opROR_M(Uint16 address, Uint8 repeatTimes);
+	void opCMP(Uint8 v1, Uint8 v2);
 
 	void setLoadFlag(Uint8 v);
 
