@@ -7,16 +7,18 @@
 /* We will use this renderer to draw into this window every frame. */
 static SDL_Window * window = NULL;
 static SDL_Renderer* renderer = NULL;
+static SDL_AudioStream* stream = NULL;
 
 static console myConsole;
 static Uint64 time = 0;
+static Uint64 apuTime = 0;
 
 /* This function runs once at startup. */
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 {
     SDL_SetAppMetadata("Donky Kong Port", "0.0", "donkykongport.mkwong98");
 
-    if (!SDL_Init(SDL_INIT_VIDEO)) {
+    if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
         SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
@@ -28,8 +30,20 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     myConsole.rom.loadROM(SDL_IOFromFile("..\\x64\\Debug\\Donkey Kong (JU).nes", "rb"));
 	myConsole.renderer.loadPalette(SDL_IOFromFile("..\\x64\\Debug\\2C02G_wiki.pal", "rb"));
 	myConsole.renderer.renderer = renderer;
+
+    SDL_AudioSpec spec;
+    spec.channels = 1;
+    spec.format = SDL_AUDIO_F32;
+    spec.freq = 48000;
+    stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &spec, sound::FeedAudioStream, &(myConsole.snd));
+    if (!stream) {
+        SDL_Log("Couldn't create audio stream: %s", SDL_GetError());
+        return SDL_APP_FAILURE;
+    }
+
 	/* Reset the CPU to start the program. */
 	myConsole.cpu.reset();
+    SDL_ResumeAudioStreamDevice(stream);
 
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
@@ -52,11 +66,16 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     myConsole.cpu.repeat();
     Uint64 newTime = SDL_GetTicksNS();
     Uint64 timeDif = newTime - time;
-    if (timeDif >= 16667) {
-        myConsole.runFrame(timeDif);
-        time += 16667;
+    if (timeDif >= FRAME_DURATION_NS) {
+        myConsole.runFrame();
+        time += FRAME_DURATION_NS;
     }
 
+    Uint64 apuTimeDif = newTime - apuTime;
+    if (apuTimeDif >= FRAME_COUNTER_NS) {
+        myConsole.apu.runFrame();
+        apuTime += FRAME_COUNTER_NS;
+    }
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
 

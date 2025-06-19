@@ -8,10 +8,11 @@ console::console() {
 	iop.myConsole = this;
 
 	renderer.myConsole = this;
+	snd.myConsole = this;
 	controllers.myConsole = this;
 }
 
-void console::runFrame(Uint64 ns) {
+void console::runFrame() {
 	cpu.nmi();
 	ppu.render();
 	renderer.renderFrame();

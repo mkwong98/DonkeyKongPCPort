@@ -55,10 +55,10 @@ void controller::handleEvent(SDL_Event* event) {
 		case SDL_SCANCODE_DOWN: controller1.down = pressed; break;
 		case SDL_SCANCODE_LEFT: controller1.left = pressed; break;
 		case SDL_SCANCODE_RIGHT: controller1.right = pressed; break;
-		case SDL_SCANCODE_PERIOD: controller1.a = pressed; break;
-		case SDL_SCANCODE_COMMA: controller1.b = pressed; break;
-		case SDL_SCANCODE_K: controller1.select = pressed; break;
-		case SDL_SCANCODE_L: controller1.start = pressed; break;
+		case SDL_SCANCODE_K: controller1.a = pressed; break;
+		case SDL_SCANCODE_L: controller1.b = pressed; break;
+		case SDL_SCANCODE_O: controller1.select = pressed; break;
+		case SDL_SCANCODE_P: controller1.start = pressed; break;
 
 		case SDL_SCANCODE_W: controller1.up = pressed; break;
 		case SDL_SCANCODE_S: controller1.down = pressed; break;

@@ -164,6 +164,7 @@
     <ClCompile Include="ppu.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="rom.cpp" />
+    <ClCompile Include="sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="apu.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="ppu.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="rom.h" />
+    <ClInclude Include="sound.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

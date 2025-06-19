@@ -13,6 +13,9 @@ Uint8 mapper000::readCPU(Uint16 address) {
 	else if (address < 0x4000) {
 		return rom->myConsole->ppu.readReg(address & 0x2007);
 	}
+	else if (address == 0x4015) {
+		return rom->myConsole->apu.readReg(address);
+	}
 	else if (address == 0x4016 || address == 0x4017) {
 		return rom->myConsole->iop.readReg(address);
 	}
@@ -33,11 +36,20 @@ void mapper000::writeCPU(Uint16 address, Uint8 value) {
 	else if (address < 0x4000) {
 		rom->myConsole->ppu.writeReg(address & 0x2007, value);
 	}
+	else if (address < 0x4014) {
+		rom->myConsole->apu.writeReg(address, value);
+	}
 	else if (address == 0x4014) {
 		rom->myConsole->ppu.writeReg4014(value);
 	}
+	else if (address == 0x4015) {
+		rom->myConsole->apu.writeReg(address, value);
+	}
 	else if (address == 0x4016) {
 		rom->myConsole->iop.writeReg(address, value);
+	}
+	else if (address == 0x4017) {
+		rom->myConsole->apu.writeReg(address, value);
 	}
 }
 
