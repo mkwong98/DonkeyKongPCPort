@@ -10,6 +10,7 @@ void SDLCALL sound::FeedAudioStream(void* userdata, SDL_AudioStream* astream, in
 sound::sound() {
     pulse1Cycle = 0;
     pulse2Cycle = 0;
+    triangleCycle = 0;
 }
 
 void sound::fillBuffer(SDL_AudioStream* astream, int additional_amount, int total_amount) {
@@ -18,14 +19,16 @@ void sound::fillBuffer(SDL_AudioStream* astream, int additional_amount, int tota
         float samples[128];  /* this will feed 128 samples each iteration until we have enough. */
         float pulse1Samples[128];
         float pulse2Samples[128];
+        float triangleSamples[128];
 
         const int total = SDL_min(additional_amount, SDL_arraysize(samples));
 
         genPulseWave(myConsole->apu.pulse1Settings, pulse1Samples, total, &pulse1Cycle);
         genPulseWave(myConsole->apu.pulse2Settings, pulse2Samples, total, &pulse2Cycle);
+        genTriangleWave(triangleSamples, total);
 
         for (int i = 0; i < total; i++) {
-            samples[i] = 0.02256 * (pulse1Samples[i] + pulse2Samples[i]);
+            samples[i] = 0.2256 * (pulse1Samples[i] + pulse2Samples[i]) +(0.2553 * triangleSamples[i]);
         }
 
         /* feed the new data to the stream. It will queue at the end, and trickle out as the hardware needs more data. */
@@ -46,16 +49,36 @@ void sound::genPulseWave(pulseSettings p, float* output, int samples, float* cyc
                 output[i] = vol;
             }
             else {
-                output[i] = 0;
+                output[i] = -1;
             }
         }
     }
     else {
         for (int i = 0; i < samples; i++) {
-            output[i] = 0;
+            output[i] = -1;
         }
     }
 }
 
-
+void sound::genTriangleWave(float* output, int samples) {
+    if (myConsole->apu.triangleLengthCounter > 0 && myConsole->apu.triangleLinearCounter) {
+        float cyclePerSample = (1789773.0 / (32 * (myConsole->apu.triangleTimer + 1))) / 48000.0;
+        for (int i = 0; i < samples; i++) {
+            triangleCycle += cyclePerSample;
+            if (triangleCycle > 1.0) triangleCycle -= 1.0;
+            float vol;
+            if (triangleCycle < 0.5) {
+                output[i] = -1 + triangleCycle * 4;
+            }
+            else{
+                output[i] = 1 - ((triangleCycle - 0.5) * 4);
+            }
+        }
+    }
+    else {
+        for (int i = 0; i < samples; i++) {
+            output[i] = -1;
+        }
+    }
+}
 

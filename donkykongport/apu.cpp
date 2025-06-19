@@ -45,6 +45,13 @@ apu::apu() {
 	pulse2Settings.sweepDivider = 0;
 	pulse2Settings.targetPeriod = 0;
 
+	triangleLengthCounterHalt = false;
+	triangleLinearCounterReload = false;
+	triangleLinearCounterLoad = 0;
+	triangleTimer = 0;
+	triangleLengthCounter = 0;
+	triangleLinearCounter = 0;
+
 	triangleEnabled = false;
 	noiseEnabled = false;
 	dmcEnabled = false;
@@ -89,6 +96,9 @@ void apu::writeReg(Uint16 address, Uint8 v) {
 	case 0x4005: writePulseReg1(&pulse2Settings, v); break;
 	case 0x4006: writePulseReg2(&pulse2Settings, v); break;
 	case 0x4007: writePulseReg3(&pulse2Settings, v); break;
+	case 0x4008: writeReg4008(v); break;
+	case 0x400A: writeReg400A(v); break;
+	case 0x400B: writeReg400B(v); break;
 	case 0x4015: writeReg4015(v); break;
 	case 0x4017: writeReg4017(v); break;
 	default:
@@ -106,10 +116,12 @@ void apu::runFrame() {
 		case 0:
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			break;
 		case 1:
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			clockPulseSweep(&pulse1Settings, true); // Clock pulse 1 sweep
 			clockPulseSweep(&pulse2Settings, false); // Clock pulse 2 sweep
 			clockPulseLengthCounter(&pulse1Settings); // Clock pulse 1 length counter
@@ -118,12 +130,14 @@ void apu::runFrame() {
 		case 2:
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			break;
 		case 3:
 			break;
 		case 4:
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			clockPulseSweep(&pulse1Settings, true); // Clock pulse 1 sweep
 			clockPulseSweep(&pulse2Settings, false); // Clock pulse 2 sweep
 			clockPulseLengthCounter(&pulse1Settings); // Clock pulse 1 length counter
@@ -146,10 +160,12 @@ void apu::runFrame() {
 		case 0:
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			break;
 		case 1:
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			clockPulseSweep(&pulse1Settings, true); // Clock pulse 1 sweep
 			clockPulseSweep(&pulse2Settings, false); // Clock pulse 2 sweep
 			clockPulseLengthCounter(&pulse1Settings); // Clock pulse 1 length counter
@@ -158,11 +174,13 @@ void apu::runFrame() {
 		case 2:
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			break;
 		case 3:
 			if(!irqInhibit) frameInterrupt = true; // Set frame interrupt flag
 			clockPulseEnv(&pulse1Settings); // Clock pulse 1 envelope
 			clockPulseEnv(&pulse2Settings); // Clock pulse 2 envelope
+			clockTriangleLinearCounter();
 			clockPulseSweep(&pulse1Settings, true); // Clock pulse 1 sweep
 			clockPulseSweep(&pulse2Settings, false); // Clock pulse 2 sweep
 			clockPulseLengthCounter(&pulse1Settings); // Clock pulse 1 length counter
@@ -203,12 +221,30 @@ void apu::writePulseReg3(pulseSettings* p, Uint8 v) {
 	p->envelopeStart = true;
 }
 
+void apu::writeReg4008(Uint8 v) {
+	triangleLengthCounterHalt = v & 0x80;
+	triangleLinearCounterLoad = v & 0x7F;
+}
+
+void apu::writeReg400A(Uint8 v) {
+	triangleTimer = (triangleTimer & 0xFF00) | v; // Lower byte
+}
+
+void apu::writeReg400B(Uint8 v) {
+	triangleTimer = (triangleTimer & 0x00FF) | ((v & 0x07) << 8); // Upper byte
+	triangleLengthCounter = lengthCounterTable[(v >> 3) & 0x1F]; // Bits 3-7
+	triangleLinearCounterReload = true;
+}
+
+
+
 void apu::writeReg4015(Uint8 v) {
 	pulse1Settings.enabled = v & 0x01; // Bit 0
 	if (!pulse1Settings.enabled) pulse1Settings.lengthCounter = 0;
 	pulse2Settings.enabled = v & 0x02; // Bit 1
 	if (!pulse2Settings.enabled) pulse2Settings.lengthCounter = 0;
 	triangleEnabled = v & 0x04; // Bit 2
+	if (!triangleEnabled) triangleLengthCounter = 0;
 	noiseEnabled = v & 0x08; // Bit 3
 	dmcEnabled = v & 0x10; // Bit 4
 }
@@ -294,5 +330,23 @@ void apu::clockPulseLengthCounter(pulseSettings* p) {
 			p->lengthCounter--;
 		}
 	}
+}
+
+void apu::clockTriangleLengthCounter() {
+	if (triangleEnabled && !triangleLengthCounterHalt) {
+		if (triangleLengthCounter > 0) {
+			triangleLengthCounter--;
+		}
+	}
+}
+
+void apu::clockTriangleLinearCounter() {
+	if (triangleLinearCounterReload) {
+		triangleLinearCounter = triangleLinearCounterLoad;
+	}
+	else if(triangleLinearCounter > 0){
+		triangleLinearCounter--;
+	}
+	if (!triangleLengthCounterHalt) triangleLinearCounterReload = false;
 }
 

@@ -39,6 +39,13 @@ public:
 	pulseSettings pulse1Settings;
 	pulseSettings pulse2Settings;
 
+	bool triangleLengthCounterHalt;
+	bool triangleLinearCounterReload;
+	Uint8 triangleLinearCounterLoad;
+	Uint16 triangleTimer;
+	Uint8 triangleLengthCounter;
+	Uint8 triangleLinearCounter;
+
 	bool triangleEnabled;
 	bool noiseEnabled;
 	bool dmcEnabled;
@@ -67,6 +74,10 @@ private:
 	void writePulseReg2(pulseSettings* p, Uint8 v);
 	void writePulseReg3(pulseSettings* p, Uint8 v);
 
+	void writeReg4008(Uint8 v);
+	void writeReg400A(Uint8 v);
+	void writeReg400B(Uint8 v);
+
 	void writeReg4015(Uint8 v);
 	Uint8 readReg4015();
 	void writeReg4017(Uint8 v);
@@ -75,5 +86,7 @@ private:
 	void clockPulseSweep(pulseSettings* p, bool isPulse1);
 	void clockPulseLengthCounter(pulseSettings* p);
 
+	void clockTriangleLengthCounter();
+	void clockTriangleLinearCounter();
 };
 

@@ -68,13 +68,13 @@ SDL_AppResult SDL_AppIterate(void* appstate)
     Uint64 timeDif = newTime - time;
     if (timeDif >= FRAME_DURATION_NS) {
         myConsole.runFrame();
-        time += FRAME_DURATION_NS;
+        time = newTime;
     }
 
     Uint64 apuTimeDif = newTime - apuTime;
     if (apuTimeDif >= FRAME_COUNTER_NS) {
         myConsole.apu.runFrame();
-        apuTime += FRAME_COUNTER_NS;
+        apuTime = newTime;
     }
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
