@@ -1,0 +1,24 @@
+A port of NES Donkey Kong to PC. The game code is converted using NesRomAnalyzer. Data and graphics are taken from the ROM. Only 2 pulse channels and triangle channel are implemented. 
+
+To run the program, place a copy of the ROM named "Donkey Kong (JU).nes" and a palette file named "2C02G_wiki.pal" in the same directory as the program to run.
+
+The control is mapped as follow
+Player 1:
+Up = up
+Down = down
+Left = left
+Right = right
+A = K
+B = L
+Select = O
+Start = P
+
+Player 2:
+Up = W
+Down = S
+Left = A
+Right = D
+A = H
+B = G
+Select = T
+Start = Y
