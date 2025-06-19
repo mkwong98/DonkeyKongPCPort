@@ -206,6 +206,13 @@ void game::popStatus() {
 	mStack.pop();
 }
 
+void game::opPLA() {
+	a = mStack.top().value;
+	mStack.pop();
+	flgZ = a == 0;
+	flgN = a & 0x80;
+}
+
 void game::setLoadFlag(Uint8 v) {
 	flgZ = v == 0;
 	flgN = v & 0x80;

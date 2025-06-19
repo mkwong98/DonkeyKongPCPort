@@ -63,6 +63,7 @@ public:
 	void popAddress();
 	void pushStatus();
 	void popStatus();
+	void opPLA();
 
 	void reset();
 	void repeat();
