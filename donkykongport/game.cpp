@@ -72,8 +72,8 @@ void game::opEOR(Uint8 v) {
 void game::opBIT(Uint8 v) {
 	Uint8 result = a & v;
 	flgZ = a == 0;
-	flgV = a & 0x40;
-	flgN = a & 0x80;
+	flgV = v & 0x40;
+	flgN = v & 0x80;
 }
 
 void game::opINC(Uint16 address, Uint8 repeatTimes) {
@@ -151,7 +151,8 @@ void game::opLSR_M(Uint16 address, Uint8 repeatTimes) {
 }
 
 void game::opROL_A(Uint8 repeatTimes) {
-	Uint16 result = (a << repeatTimes) | (a >> (8 - repeatTimes));
+	Uint16 result = a | (flgC ? 0x0100 : 0); // Include carry bit in the result
+	result = (result << repeatTimes) | (result >> (9 - repeatTimes));
 	flgC = result & 0x0100;
 	flgZ = result == 0;
 	flgN = result & 0x80;
@@ -159,7 +160,8 @@ void game::opROL_A(Uint8 repeatTimes) {
 }
 
 void game::opROL_M(Uint16 address, Uint8 repeatTimes) {
-	Uint16 result = (myMapper->readCPU(address) << repeatTimes) | (myMapper->readCPU(address) >> (8 - repeatTimes));
+	Uint16 result = myMapper->readCPU(address) | (flgC ? 0x0100 : 0); // Include carry bit in the result
+	result = (result << repeatTimes) | (result >> (9 - repeatTimes));
 	flgC = result & 0x0100;
 	flgZ = result == 0;
 	flgN = result & 0x80;
@@ -167,7 +169,8 @@ void game::opROL_M(Uint16 address, Uint8 repeatTimes) {
 }
 
 void game::opROR_A(Uint8 repeatTimes) {
-	Uint16 result = (a >> repeatTimes) | (a << (8 - repeatTimes));
+	Uint16 result = a | (flgC ? 0x0100 : 0); // Include carry bit in the result
+	result = (result >> repeatTimes) | (result << (9 - repeatTimes));
 	flgC = result & 0x0100;
 	flgZ = result == 0;
 	flgN = result & 0x80;
@@ -175,7 +178,8 @@ void game::opROR_A(Uint8 repeatTimes) {
 }
 
 void game::opROR_M(Uint16 address, Uint8 repeatTimes) {
-	Uint16 result = (myMapper->readCPU(address) >> repeatTimes) | (myMapper->readCPU(address) << (8 - repeatTimes));
+	Uint16 result = myMapper->readCPU(address) | (flgC ? 0x0100 : 0); // Include carry bit in the result
+	result = (result >> repeatTimes) | (result << (9 - repeatTimes));
 	flgC = result & 0x0100;
 	flgZ = result == 0;
 	flgN = result & 0x80;
