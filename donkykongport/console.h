@@ -26,7 +26,10 @@ public:
 	sound snd;
 	controller controllers;
 
+
+
 	console();
 	void runFrame();
+	void readConfig();
 };
 

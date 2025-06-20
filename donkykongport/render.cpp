@@ -2,6 +2,8 @@
 #include "console.h"
 
 void render::renderFrame() {
+	SDL_SetRenderTarget(renderer, internalScreen);
+
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
 	Uint16 pixelID = 0;
@@ -51,7 +53,8 @@ void render::renderFrame() {
 			pixelID++;
 		}
 	}
-
+	SDL_SetRenderTarget(renderer, NULL);
+	SDL_RenderTexture(renderer, internalScreen, NULL, NULL);
 	SDL_RenderPresent(renderer);
 }
 
@@ -65,4 +68,31 @@ void render::loadPalette(SDL_IOStream* palFile) {
 		colors[i].a = SDL_ALPHA_OPAQUE;
 	}
 	SDL_CloseIO(palFile);
+}
+
+void render::setConfig(string h, string t) {
+	if (h == "PALETTE") {
+		loadPalette(SDL_IOFromFile(t.c_str(), "rb"));
+	}
+	else if (h == "WIDTH") {
+		displayWidth = std::stoi(t);
+	}
+	else if (h == "HEIGHT") {
+		displayHeight = std::stoi(t);
+	}
+}
+
+render::render() {
+	displayWidth = 256;
+	displayHeight = 240;
+}
+
+
+void render::init(SDL_Renderer* r) {
+	renderer = r;
+	internalScreen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 256, 240);
+}
+
+void render::cleanUp() {
+	if (internalScreen) SDL_DestroyTexture(internalScreen);
 }

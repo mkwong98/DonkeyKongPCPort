@@ -23,13 +23,13 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
         return SDL_APP_FAILURE;
     }
 
-    if (!SDL_CreateWindowAndRenderer("", 256, 240, 0, &window, &renderer)) {
+    myConsole.readConfig();
+
+    if (!SDL_CreateWindowAndRenderer("", myConsole.renderer.displayWidth, myConsole.renderer.displayHeight, 0, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-    myConsole.rom.loadROM(SDL_IOFromFile("..\\x64\\Debug\\Donkey Kong (JU).nes", "rb"));
-	myConsole.renderer.loadPalette(SDL_IOFromFile("..\\x64\\Debug\\2C02G_wiki.pal", "rb"));
-	myConsole.renderer.renderer = renderer;
+	myConsole.renderer.init(renderer);
 
     SDL_AudioSpec spec;
     spec.channels = 1;
@@ -83,4 +83,5 @@ SDL_AppResult SDL_AppIterate(void* appstate)
 void SDL_AppQuit(void* appstate, SDL_AppResult result)
 {
     /* SDL will clean up the window/renderer for us. */
+    myConsole.renderer.cleanUp();
 }
