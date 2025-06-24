@@ -47,6 +47,9 @@ void console::readConfig() {
 				if (lineHead == "DISPLAY") {
 					renderer.setConfig(valueHead, valueTail);
 				}
+				else if (lineHead == "CONTROL") {
+					controllers.setConfig(valueHead, valueTail);
+				}
 			}
 		}
 	}

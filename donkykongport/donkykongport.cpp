@@ -18,7 +18,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
 {
     SDL_SetAppMetadata("Donky Kong Port", "0.0", "donkykongport.mkwong98");
 
-    if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+    if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK)) {
         SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
@@ -30,6 +30,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
         return SDL_APP_FAILURE;
     }
 	myConsole.renderer.init(renderer);
+    myConsole.controllers.init();
 
     SDL_AudioSpec spec;
     spec.channels = 1;
@@ -54,7 +55,9 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
     if (event->type == SDL_EVENT_QUIT) {
         return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
     }
-	if (event->type == SDL_EVENT_KEY_DOWN || event->type == SDL_EVENT_KEY_UP) {
+	if (event->type == SDL_EVENT_KEY_DOWN || event->type == SDL_EVENT_KEY_UP 
+        || event->type == SDL_EVENT_JOYSTICK_AXIS_MOTION || event->type == SDL_EVENT_JOYSTICK_HAT_MOTION 
+        || event->type == SDL_EVENT_JOYSTICK_BUTTON_DOWN || event->type == SDL_EVENT_JOYSTICK_BUTTON_UP) {
 		myConsole.controllers.handleEvent(event);
 	}
     return SDL_APP_CONTINUE;  /* carry on with the program! */
