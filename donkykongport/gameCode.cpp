@@ -137,7 +137,6 @@ void game::SUB_000831() {
     setLoadFlag(a);
     myMapper->writeCPU(0x0007, a);
     popAddress();
-    return;
 }
 
 void game::SUB_000847() {
@@ -150,7 +149,6 @@ void game::SUB_000847() {
     setLoadFlag(a);
     myMapper->writeCPU(0x0003, a);
     popAddress();
-    return;
 }
 
 void game::SUB_000853() {
@@ -163,7 +161,6 @@ void game::SUB_000853() {
     setLoadFlag(a);
     myMapper->writeCPU(0x0009, a);
     popAddress();
-    return;
 }
 
 void game::nmi() {
@@ -397,7 +394,6 @@ void game::SUB_0008F3() {
     }
 L_000989:
     popAddress();
-    return;
 }
 
 void game::SUB_00098A() {
@@ -569,7 +565,6 @@ void game::SUB_000A53() {
     SUB_000BAE();
     if (poppedEntry.value != 0x000A56) return;
     popAddress();
-    return;
 }
 
 void game::SUB_000A5A() {
@@ -656,7 +651,6 @@ void game::SUB_000AA9() {
         opCMP(y, 0x03);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_000AB9() {
@@ -672,7 +666,6 @@ void game::SUB_000AB9() {
         opCMP(y, 0x03);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_000AC9() {
@@ -886,7 +879,6 @@ L_000B9E:
     if (poppedEntry.value != 0x000BA8) return;
     opDEC(0x0043, 1);
     popAddress();
-    return;
 }
 
 void game::SUB_000BAE() {
@@ -959,7 +951,6 @@ void game::SUB_000BCA() {
     }
 L_000BF4:
     popAddress();
-    return;
 }
 
 void game::SUB_000BF5() {
@@ -976,7 +967,6 @@ void game::SUB_000BF5() {
     }
 L_000C03:
     popAddress();
-    return;
 }
 
 void game::SUB_000C04() {
@@ -1012,7 +1002,6 @@ void game::SUB_000C04() {
     }
 L_000C23:
     popAddress();
-    return;
 }
 
 void game::SUB_000C24() {
@@ -1135,7 +1124,6 @@ L_000CA6:
     myMapper->writeCPU(0x0442, a);
     myMapper->writeCPU(0x0444, a);
     popAddress();
-    return;
 }
 
 void game::SUB_000CC1() {
@@ -1183,7 +1171,6 @@ void game::SUB_000CC1() {
     }
 L_000CF3:
     popAddress();
-    return;
 }
 
 void game::SUB_000CF4() {
@@ -1313,7 +1300,6 @@ void game::SUB_000D76() {
         opDEY(1);
     } while (!flgN);
     popAddress();
-    return;
 }
 
 void game::SUB_000D7F() {
@@ -1540,7 +1526,6 @@ L_000E2F:
     myMapper->writeCPU(0x02F4, a);
     myMapper->writeCPU(0x02FC, a);
     popAddress();
-    return;
 }
 
 void game::SUB_000E7C() {
@@ -1794,7 +1779,6 @@ L_000FA1:
     opORA(0x10);
     myMapper->writeCPU(0x0011, a);
     popAddress();
-    return;
 }
 
 void game::SUB_000FA8() {
@@ -1825,7 +1809,6 @@ void game::SUB_000FA8() {
         opCMP(x, 0x02);
     } while (flgN);
     popAddress();
-    return;
 }
 
 void game::SUB_000FC6() {
@@ -1878,7 +1861,6 @@ void game::SUB_000FC6() {
         opCMP(y, 0x10);
     } while (flgN);
     popAddress();
-    return;
 }
 
 void game::SUB_001008() {
@@ -1924,7 +1906,6 @@ L_00102A:
     x = a;
     setLoadFlag(x);
     popAddress();
-    return;
 }
 
 void game::SUB_001032() {
@@ -1951,7 +1932,6 @@ void game::SUB_001041() {
     myMapper->writeCPU(0x00FC, a);
 L_00104B:
     popAddress();
-    return;
 }
 
 void game::SUB_00104C() {
@@ -2058,7 +2038,6 @@ void game::SUB_00104C() {
     }
 L_0010BF:
     popAddress();
-    return;
 }
 
 void game::SUB_0010C0() {
@@ -2224,7 +2203,6 @@ L_001169:
     setLoadFlag(a);
     myMapper->writeCPU(0x004F, a);
     popAddress();
-    return;
 }
 
 void game::SUB_001175() {
@@ -2262,7 +2240,6 @@ void game::SUB_001175() {
     }
 L_001199:
     popAddress();
-    return;
 }
 
 void game::SUB_00119A() {
@@ -2272,7 +2249,6 @@ void game::SUB_00119A() {
     myMapper->writeCPU(0x2001, a);
     myMapper->writeCPU(0x0011, a);
     popAddress();
-    return;
 }
 
 void game::SUB_0011A4() {
@@ -2526,7 +2502,6 @@ L_00128B:
     myMapper->writeCPU(0x005C, a);
 L_0012CA:
     popAddress();
-    return;
 }
 
 void game::SUB_0012CB() {
@@ -2604,7 +2579,6 @@ L_001323:
     a = myMapper->readCPU(0x000C);
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_001326() {
@@ -2671,7 +2645,6 @@ L_001365:
     setLoadFlag(a);
     myMapper->writeCPU(0x00DA, a);
     popAddress();
-    return;
 }
 
 void game::SUB_00136A() {
@@ -2694,7 +2667,6 @@ L_00137B:
     a = 0x01;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_00137E() {
@@ -3003,7 +2975,6 @@ L_0014CF:
     myMapper->writeCPU(0x0085, a);
 L_0014ED:
     popAddress();
-    return;
 }
 
 void game::SUB_0014EE() {
@@ -3036,7 +3007,6 @@ void game::SUB_001501() {
     myMapper->writeCPU(0x00FF, a);
 L_001509:
     popAddress();
-    return;
 }
 
 void game::SUB_00150A() {
@@ -3094,7 +3064,6 @@ L_001544:
     a = myMapper->readCPU(0x0008);
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_001547() {
@@ -3312,7 +3281,6 @@ void game::SUB_001547() {
     }
 L_00164F:
     popAddress();
-    return;
 }
 
 void game::SUB_001697() {
@@ -3356,7 +3324,6 @@ void game::SUB_001697() {
     }
 L_0016C5:
     popAddress();
-    return;
 }
 
 void game::SUB_0016C6() {
@@ -3597,7 +3564,6 @@ L_0017DA:
     setLoadFlag(a);
     myMapper->writeCPU(0x00FC, a);
     popAddress();
-    return;
 }
 
 void game::SUB_0017F2() {
@@ -3613,7 +3579,6 @@ void game::SUB_0017F2() {
     SUB_000815();
     if (poppedEntry.value != 0x0017FC) return;
     popAddress();
-    return;
 }
 
 void game::SUB_001800() {
@@ -3758,7 +3723,6 @@ L_0018A8:
     setLoadFlag(a);
     myMapper->writeCPU(0x00A0, a);
     popAddress();
-    return;
 }
 
 void game::SUB_0018AD() {
@@ -3815,7 +3779,6 @@ L_0018E6:
 L_0018E8:
     myMapper->writeCPU(0x000C, a);
     popAddress();
-    return;
 }
 
 void game::SUB_0018EB() {
@@ -3867,7 +3830,6 @@ L_001917:
     a = 0x00;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_00191A() {
@@ -3967,7 +3929,6 @@ L_00198B:
 L_00198D:
     myMapper->writeCPU(0x005A, a);
     popAddress();
-    return;
 }
 
 void game::SUB_001990() {
@@ -4049,7 +4010,6 @@ L_0019E3:
     a = 0x00;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_0019E6() {
@@ -4096,7 +4056,6 @@ void game::SUB_0019E8() {
 L_001A13:
     myMapper->writeCPU(0x00BE, a);
     popAddress();
-    return;
 }
 
 void game::SUB_001A16() {
@@ -4148,7 +4107,6 @@ void game::SUB_001A16() {
         opCMP(a, 0x09);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_001A4C() {
@@ -4526,7 +4484,6 @@ L_001BAC:
     myMapper->writeCPU((0x005E + x) & 0x00ff, a);
 L_001BED:
     popAddress();
-    return;
 }
 
 void game::SUB_001BEE() {
@@ -4580,7 +4537,6 @@ L_001C2B:
 L_001C2D:
     myMapper->writeCPU((0x0072 + x) & 0x00ff, a);
     popAddress();
-    return;
 }
 
 void game::SUB_001C30() {
@@ -4634,7 +4590,6 @@ void game::SUB_001C30() {
     }
 L_001C68:
     popAddress();
-    return;
 }
 
 void game::SUB_001C69() {
@@ -4732,7 +4687,6 @@ void game::SUB_001C69() {
         myMapper->writeCPU((0x005E + x) & 0x00ff, a);
     }
     popAddress();
-    return;
 }
 
 void game::SUB_001CD0() {
@@ -4823,7 +4777,6 @@ L_001D25:
     SUB_002ADB();
     if (poppedEntry.value != 0x001D2E) return;
     popAddress();
-    return;
 }
 
 void game::SUB_001D32() {
@@ -4905,7 +4858,6 @@ L_001D7F:
     setLoadFlag(x);
     myMapper->writeCPU((0x0068 + x) & 0x00ff, a);
     popAddress();
-    return;
 }
 
 void game::SUB_001D8B() {
@@ -5110,7 +5062,6 @@ void game::SUB_001D8B() {
     if (poppedEntry.value != 0x001E82) return;
 L_001E85:
     popAddress();
-    return;
 }
 
 void game::SUB_001E86() {
@@ -5140,7 +5091,6 @@ void game::SUB_001E86() {
     } while (!flgZ);
 L_001EA4:
     popAddress();
-    return;
 }
 
 void game::SUB_001EA5() {
@@ -5225,7 +5175,6 @@ L_001EFB:
     SUB_002ADB();
     if (poppedEntry.value != 0x001F03) return;
     popAddress();
-    return;
 }
 
 void game::SUB_001F07() {
@@ -5281,7 +5230,6 @@ L_001F35:
     setLoadFlag(a);
     myMapper->writeCPU(0x00C0, a);
     popAddress();
-    return;
 }
 
 void game::SUB_001F40() {
@@ -5411,7 +5359,6 @@ L_001FB8:
     opADC(myMapper->readCPU(0x0001));
     myMapper->writeCPU(0x00C0, a);
     popAddress();
-    return;
 }
 
 void game::SUB_001FC3() {
@@ -5439,7 +5386,6 @@ void game::SUB_001FC3() {
     }
 L_001FE3:
     popAddress();
-    return;
 }
 
 void game::SUB_001FE4() {
@@ -5489,7 +5435,6 @@ L_001FFB:
     setLoadFlag(a);
 L_002015:
     popAddress();
-    return;
 }
 
 void game::SUB_002016() {
@@ -5537,7 +5482,6 @@ L_002045:
     a = myMapper->readCPU(0x000B);
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_002048() {
@@ -5561,7 +5505,6 @@ L_002057:
     a = 0x00;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_00205A() {
@@ -5617,7 +5560,6 @@ L_00208D:
     a = 0x01;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_002090() {
@@ -5649,7 +5591,6 @@ L_0020AB:
     a = 0x01;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_0020AE() {
@@ -5758,7 +5699,6 @@ void game::SUB_002109() {
 void game::SUB_00210F() {
     myMapper->writeCPU(0x000C, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002112() {
@@ -5789,7 +5729,6 @@ L_00212B:
     myMapper->writeCPU(0x000C, a);
     myMapper->writeCPU(0x000A, y);
     popAddress();
-    return;
 }
 
 void game::SUB_002130() {
@@ -5814,7 +5753,6 @@ L_002141:
     a = 0x00;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_002166() {
@@ -5866,7 +5804,6 @@ L_002187:
     }
 L_002199:
     popAddress();
-    return;
 }
 
 void game::SUB_00219A() {
@@ -5933,7 +5870,6 @@ void game::SUB_00219A() {
     myMapper->writeCPU(0x0038, a);
 L_0021E4:
     popAddress();
-    return;
 }
 
 void game::SUB_0021E5() {
@@ -6035,7 +5971,6 @@ L_002237:
     }
 L_00224F:
     popAddress();
-    return;
 }
 
 void game::SUB_002250() {
@@ -6191,7 +6126,6 @@ void game::SUB_0022B6() {
 L_0022F6:
     myMapper->writeCPU((0x00AF + x) & 0x00ff, y);
     popAddress();
-    return;
 }
 
 void game::SUB_0022F9() {
@@ -6291,7 +6225,6 @@ L_002363:
 L_002365:
     myMapper->writeCPU((0x00AF + x) & 0x00ff, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002368() {
@@ -6893,7 +6826,6 @@ L_002623:
     a = 0x01;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_002626() {
@@ -7011,7 +6943,6 @@ L_00269E:
     setLoadFlag(x);
     myMapper->writeCPU((0x00AF + x) & 0x00ff, a);
     popAddress();
-    return;
 }
 
 void game::SUB_0026A5() {
@@ -7199,7 +7130,6 @@ L_002769:
     setLoadFlag(a);
     myMapper->writeCPU((0x00AF + x) & 0x00ff, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002770() {
@@ -7252,7 +7182,6 @@ L_0027A0:
     a = 0x01;
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_0027A3() {
@@ -7346,7 +7275,6 @@ L_0027F9:
     setLoadFlag(a);
     myMapper->writeCPU((0x00AF + x) & 0x00ff, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002806() {
@@ -7389,7 +7317,6 @@ L_002819:
     setLoadFlag(a);
 L_002833:
     popAddress();
-    return;
 }
 
 void game::SUB_002834() {
@@ -7644,7 +7571,6 @@ L_00295B:
     myMapper->writeCPU(0x00D9, a);
 L_002967:
     popAddress();
-    return;
 }
 
 void game::SUB_002968() {
@@ -7653,7 +7579,6 @@ void game::SUB_002968() {
     myMapper->writeCPU(0x0202 + y, a);
     myMapper->writeCPU(0x0206 + y, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002971() {
@@ -7662,14 +7587,12 @@ void game::SUB_002971() {
     myMapper->writeCPU(0x0202 + y, a);
     myMapper->writeCPU(0x0206 + y, a);
     popAddress();
-    return;
 }
 
 void game::SUB_00297A() {
     myMapper->writeCPU(0x0200 + y, a);
     myMapper->writeCPU(0x0204 + y, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002981() {
@@ -7780,7 +7703,6 @@ void game::SUB_002981() {
     }
 L_002A00:
     popAddress();
-    return;
 }
 
 void game::SUB_002A01() {
@@ -7831,7 +7753,6 @@ L_002A2F:
     setLoadFlag(a);
     myMapper->writeCPU(0x0002, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002A34() {
@@ -7870,7 +7791,6 @@ void game::SUB_002A34() {
     myMapper->writeCPU(0x0036, a);
 L_002A5E:
     popAddress();
-    return;
 }
 
 void game::SUB_002A5F() {
@@ -7933,7 +7853,6 @@ void game::SUB_002A5F() {
     myMapper->writeCPU(0x0039, a);
 L_002AA0:
     popAddress();
-    return;
 }
 
 void game::SUB_002AA1() {
@@ -7974,7 +7893,6 @@ L_002AB2:
     setLoadFlag(a);
 L_002ACC:
     popAddress();
-    return;
 }
 
 void game::SUB_002ACD() {
@@ -8001,7 +7919,6 @@ void game::SUB_002AD6() {
     setLoadFlag(a);
     myMapper->writeCPU(0x0003, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002ADB() {
@@ -8020,7 +7937,6 @@ void game::SUB_002AE1() {
     setLoadFlag(a);
     myMapper->writeCPU(0x0001, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002AEC() {
@@ -8031,7 +7947,6 @@ void game::SUB_002AEC() {
     setLoadFlag(a);
     myMapper->writeCPU(0x0001, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002AF7() {
@@ -8050,7 +7965,6 @@ void game::SUB_002AF7() {
     setLoadFlag(x);
 L_002B05:
     popAddress();
-    return;
 }
 
 void game::SUB_002B06() {
@@ -8235,7 +8149,6 @@ void game::SUB_002BA8() {
     opORA(0x10);
     myMapper->writeCPU(0x0505, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002BB6() {
@@ -8333,7 +8246,6 @@ void game::SUB_002BDA() {
     myMapper->writeCPU(0x050D, a);
     opINC(0x050E, 1);
     popAddress();
-    return;
 }
 
 void game::SUB_002C29() {
@@ -8486,7 +8398,6 @@ L_002CAF:
     }
 L_002CBE:
     popAddress();
-    return;
 }
 
 void game::SUB_002CBF() {
@@ -8659,7 +8570,6 @@ void game::SUB_002CBF() {
 L_002D87:
     myMapper->writeCPU(0x00BF, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002D8A() {
@@ -8721,7 +8631,6 @@ L_002DB5:
     }
 L_002DC4:
     popAddress();
-    return;
 }
 
 void game::SUB_002DC5() {
@@ -8788,7 +8697,6 @@ L_002E07:
     myMapper->writeCPU(0x0096, a);
 L_002E0B:
     popAddress();
-    return;
 }
 
 void game::SUB_002E0C() {
@@ -8879,7 +8787,6 @@ L_002E5C:
     setLoadFlag(a);
     myMapper->writeCPU(0x00BF, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002E6C() {
@@ -8888,7 +8795,6 @@ void game::SUB_002E6C() {
     myMapper->writeCPU(0x020A + x, a);
     myMapper->writeCPU(0x020E + x, a);
     popAddress();
-    return;
 }
 
 void game::SUB_002E79() {
@@ -9104,7 +9010,6 @@ void game::SUB_002F51() {
     }
 L_002F71:
     popAddress();
-    return;
 }
 
 void game::SUB_002F72() {
@@ -9170,7 +9075,6 @@ void game::SUB_002F72() {
     x = myMapper->readCPU(0x000F);
     setLoadFlag(x);
     popAddress();
-    return;
 }
 
 void game::SUB_002FD5() {
@@ -9204,7 +9108,6 @@ void game::SUB_002FE2() {
     x = a;
     setLoadFlag(x);
     popAddress();
-    return;
 }
 
 void game::SUB_002FE8() {
@@ -9340,7 +9243,6 @@ L_003059:
     a = myMapper->readCPU(0x000C);
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_003062() {
@@ -9355,7 +9257,6 @@ void game::SUB_003063() {
     flgC = false;
     opADC(myMapper->readCPU(0x0000));
     popAddress();
-    return;
 }
 
 void game::SUB_003069() {
@@ -9365,7 +9266,6 @@ void game::SUB_003069() {
     flgC = false;
     opADC(myMapper->readCPU(0x0001));
     popAddress();
-    return;
 }
 
 void game::SUB_003070() {
@@ -9563,7 +9463,6 @@ L_0030F2:
     setLoadFlag(x);
     opPLA();
     popAddress();
-    return;
 }
 
 void game::SUB_00310A() {
@@ -9585,7 +9484,6 @@ void game::SUB_00310A() {
         opDEX(1);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_00311E() {
@@ -9612,7 +9510,6 @@ void game::SUB_00311E() {
         opDEX(1);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_003139() {
@@ -9648,7 +9545,6 @@ void game::SUB_003139() {
         opDEC(0x0007, 1);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_003161() {
@@ -9698,7 +9594,6 @@ void game::SUB_003161() {
         opSBC(myMapper->readCPU(0x0006));
     } while (!flgN);
     popAddress();
-    return;
 }
 
 void game::SUB_003195() {
@@ -9728,7 +9623,6 @@ void game::SUB_003195() {
         opDEC(0x0007, 1);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_0031B4() {
@@ -9772,7 +9666,6 @@ void game::SUB_0031B4() {
         opDEY(1);
     } while (!flgZ);
     popAddress();
-    return;
 }
 
 void game::SUB_0031EC() {
@@ -9848,7 +9741,6 @@ void game::SUB_003228() {
     setLoadFlag(a);
     myMapper->writeCPU(0x2005, a);
     popAddress();
-    return;
 }
 
 void game::SUB_00323C() {
@@ -9870,7 +9762,6 @@ void game::SUB_00323C() {
         opSBC(0x00);
     } while (!flgN);
     popAddress();
-    return;
 }
 
 void game::SUB_00324E() {
@@ -9983,7 +9874,6 @@ L_0032C4:
     myMapper->writeCPU(0x0331 + x, a);
 L_0032D6:
     popAddress();
-    return;
 }
 
 void game::SUB_0032D7() {
@@ -10049,7 +9939,6 @@ void game::SUB_0032D7() {
     setLoadFlag(a);
     myMapper->writeCPU(0x0331 + x, a);
     popAddress();
-    return;
 }
 
 void game::SUB_00332D() {
@@ -10074,7 +9963,6 @@ void game::SUB_00332F() {
     opPLA();
 L_00333D:
     popAddress();
-    return;
 }
 
 void game::SUB_00333E() {
@@ -10237,7 +10125,6 @@ L_0033C6:
     myMapper->writeCPU((0x0025 + x) & 0x00ff, a);
 L_0033E2:
     popAddress();
-    return;
 }
 
 void game::SUB_0033E3() {
@@ -10270,7 +10157,6 @@ L_0033EE:
         opCMP(a, 0xA0);
     } while (flgC);
     popAddress();
-    return;
 }
 
 void game::SUB_003404() {
@@ -10300,7 +10186,6 @@ void game::SUB_003404() {
 L_003423:
     opORA(myMapper->readCPU(0x0001));
     popAddress();
-    return;
 }
 
 void game::SUB_003426() {
@@ -10314,7 +10199,6 @@ void game::SUB_003426() {
     setLoadFlag(a);
     opAND(0x0F);
     popAddress();
-    return;
 }
 
 void game::SUB_003435() {
@@ -10467,7 +10351,6 @@ void game::SUB_0034AC() {
         opDEX(1);
     } while (!flgN);
     popAddress();
-    return;
 }
 
 void game::SUB_0034C2() {
@@ -10502,7 +10385,6 @@ void game::SUB_0034C2() {
     myMapper->writeCPU(0x0331 + x, a);
     myMapper->writeCPU(0x0330, x);
     popAddress();
-    return;
 }
 
 void game::SUB_0034ED() {
@@ -10529,7 +10411,6 @@ L_0034FD:
     opROR_M(0x001E, 1);
     opROR_M(0x001F, 1);
     popAddress();
-    return;
 }
 
 void game::SUB_00350E() {
@@ -10549,7 +10430,6 @@ void game::SUB_00350E() {
     SUB_003522();
     if (poppedEntry.value != 0x00351E) return;
     popAddress();
-    return;
 }
 
 void game::SUB_003522() {
@@ -10597,7 +10477,6 @@ void game::SUB_003522() {
     myMapper->writeCPU((0x0015 + x) & 0x00ff, a);
 L_00355A:
     popAddress();
-    return;
 }
 
 void game::SUB_003A48() {
@@ -10651,7 +10530,6 @@ L_003A7F:
 L_003A82:
     myMapper->writeCPU(0x06F0, a);
     popAddress();
-    return;
 }
 
 void game::SUB_003A86() {
@@ -10666,7 +10544,6 @@ void game::SUB_003A86() {
     } while (!flgZ);
 L_003A8E:
     popAddress();
-    return;
 }
 
 void game::SUB_003A8F() {
@@ -10687,7 +10564,6 @@ void game::SUB_003A95() {
     myMapper->writeCPU(0x4000, x);
     myMapper->writeCPU(0x4001, y);
     popAddress();
-    return;
 }
 
 void game::SUB_003A9F() {
@@ -10712,7 +10588,6 @@ void game::SUB_003AA1() {
     myMapper->writeCPU(0x4003 + x, a);
 L_003AB2:
     popAddress();
-    return;
 }
 
 void game::SUB_003AB3() {
@@ -10764,7 +10639,6 @@ void game::SUB_003ACA() {
     a = myMapper->readCPU(0xFB4C + y);
     setLoadFlag(a);
     popAddress();
-    return;
 }
 
 void game::SUB_003AD5() {
@@ -10784,7 +10658,6 @@ void game::SUB_003AD7() {
     flgC = true;
     opSBC(myMapper->readCPU(0x0000));
     popAddress();
-    return;
 }
 
 void game::SUB_003AE0() {
@@ -10792,7 +10665,6 @@ void game::SUB_003AE0() {
     setLoadFlag(a);
     myMapper->writeCPU(0x4000, a);
     popAddress();
-    return;
 }
 
 void game::SUB_003B75() {
@@ -11533,7 +11405,6 @@ void game::SUB_003E03() {
     setLoadFlag(a);
     myMapper->writeCPU(0x4004, a);
     popAddress();
-    return;
 }
 
 void game::SUB_003E09() {
@@ -11613,6 +11484,5 @@ void game::SUB_003E31() {
         }
     }
     popAddress();
-    return;
 }
 
