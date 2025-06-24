@@ -39,7 +39,7 @@ void sound::fillBuffer(SDL_AudioStream* astream, int additional_amount, int tota
 
 
 void sound::genPulseWave(pulseSettings p, float* output, int samples, float* cycle) {
-    if (p.lengthCounter > 0 && p.timer >= 8 && p.targetPeriod < 0x800) {
+    if (p.enabled && p.lengthCounter > 0 && p.timer >= 8 && p.targetPeriod < 0x800) {
         float cyclePerSample = (1789773.0 / (4 * (p.timer + 1))) / 48000.0;
         float vol = (p.outputVolume / 7.5) - 1.0;
         for (int i = 0; i < samples; i++) {
@@ -61,7 +61,7 @@ void sound::genPulseWave(pulseSettings p, float* output, int samples, float* cyc
 }
 
 void sound::genTriangleWave(float* output, int samples) {
-    if (myConsole->apu.triangleLengthCounter > 0 && myConsole->apu.triangleLinearCounter) {
+    if (myConsole->apu.triangleEnabled && myConsole->apu.triangleLengthCounter > 0 && myConsole->apu.triangleLinearCounter) {
         float cyclePerSample = (1789773.0 / (32 * (myConsole->apu.triangleTimer + 1))) / 48000.0;
         for (int i = 0; i < samples; i++) {
             triangleCycle += cyclePerSample;
