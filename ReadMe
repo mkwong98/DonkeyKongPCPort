@@ -1,24 +1,2 @@
-A port of NES Donkey Kong to PC. The game code is converted using NesRomAnalyzer. Data and graphics are taken from the ROM. Only 2 pulse channels and triangle channel are implemented. 
-
-To run the program, fill in the configuation file located in the same directory as the program. The file path of the ROM and the file path of a palette file are required.
-
-The control is mapped as follow
-Player 1:
-Up = up
-Down = down
-Left = left
-Right = right
-A = K
-B = L
-Select = O
-Start = P
-
-Player 2:
-Up = W
-Down = S
-Left = A
-Right = D
-A = H
-B = G
-Select = T
-Start = Y
+A port of NES Donkey Kong to PC. The game code is converted using NesRomAnalyzer. Data and graphics are taken from the ROM.
+Before running the program, first run NesPortConfig.exe in the Configurator folder to create a config file.
